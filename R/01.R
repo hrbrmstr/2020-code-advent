@@ -29,6 +29,21 @@ sums <- combn(input, 2, sum)
 
 Reduce(`*`, pairs[,which(sums == 2020)])
 
+# alternate that is _slightly_ faster (all depends on where the 2020 sum is)
+
+res <- NULL
+
+try(
+  combn(input, 2, function(x) {
+  if (sum(x) == 2020) {
+    res <<- Reduce(`*`, x)
+    stop() # we found it so short-circuit the operation
+  }
+  x
+}), silent = TRUE)
+
+res
+
 # Day 01 - 02 -------------------------------------------------------------
 
 # Before you leave, the Elves in accounting just need you to fix your expense report (your puzzle input); apparently, something isn't quite adding up.
