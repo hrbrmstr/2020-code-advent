@@ -13,7 +13,7 @@ scalaVersion := "2.13.3"
 
 // It's possible to define many kinds of settings, such as:
 
-name := "AdOfCo-01"
+name := "AdOfCo-02"
 organization := "is.rud.scala"
 version := "1.0"
 
