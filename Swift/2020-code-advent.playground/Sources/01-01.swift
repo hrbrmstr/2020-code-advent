@@ -1,6 +1,6 @@
 import Foundation
 
-public class advent {
+public class advent01 {
   
   public static func day_01_01() -> Int {
     
