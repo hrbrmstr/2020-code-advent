@@ -21,12 +21,12 @@ count_trees = function(orig_map, slope_x, slope_y) {
 
   while(true) {
 
-    xpos = xpos + slope_x
-    ypos = ypos + slope_y
+    xpos += slope_x
+    ypos += slope_y
 
     if (ypos >= m_rows) break
 
-    if (actual_map[ypos][xpos] == "#") n_trees = n_trees + 1
+    if (actual_map[ypos][xpos] == "#") n_trees += 1
 
   }
 
@@ -49,6 +49,3 @@ console.log(
     .map((idx) => count_trees(orig_map, x[idx], y[idx]))
     .reduce((a, b) => a * b)
 )
-
-
-
