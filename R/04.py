@@ -19,7 +19,7 @@ sum([ test_fields(rec) for rec in recs ])
 # 04-02 -------------------------------------------------------------------
 
 def validate_height(value):
-  match = re.match(r"^(?P<val>[0-9]{2,3})(?P<unit>cm|in)$"
+  match = re.match(r"^(?P<val>[0-9]{2,3})(?P<unit>cm|in)$", value)
   val = int(match.group("val"))
   unit = match.group("unit")
   if (unit == "cm"):
@@ -28,15 +28,17 @@ def validate_height(value):
     return(59 <= val <= 76)
   
 def validate(fval):
-  return({
-    "byr": lambda x: re.match(r"^[0-9]{4}$", fval[1]) && (1920 <=int(fval[1]) <= 2002),
-    "iyr": lambda x: re.match(r"^[0-9]{4}$", fval[1]) && (2010 <=int(fval[1]) <= 2020),
-    "eyr": lambda x: re.match(r"^[0-9]{4}$", fval[1]) && (2020 <=int(fval[1]) <= 2030),
-    "hgt": lambda x: re.match(r"^[0-9]{2,3}(cm|in)$", fval[1]) && validate_height(fval[1]),
-    "hcl": lambda x: re.match(r"#[a-f0-9]{6}", fval[1]),
-    "ecl": lambda x: fval[1] in set(["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]),
-    "hcl": lambda x: re.match(r"[0-9]{9}^$", fval[1])
-  }[fval[0]](fval[1]))
+  is_valid = {
+    "byr": lambda x: re.match(r"^[0-9]{4}$", x) is not None and (1920 <= int(x) <= 2002),
+    "iyr": lambda x: re.match(r"^[0-9]{4}$", x) is not None and (2010 <= int(x) <= 2020),
+    "eyr": lambda x: re.match(r"^[0-9]{4}$", x) is not None and (2020 <= int(x) <= 2030),
+    "hgt": lambda x: re.match(r"^[0-9]{2,3}(cm|in)$", x) is not None and validate_height(x),
+    "hcl": lambda x: re.match(r"^#[a-f0-9]{6}$", x)  is not None,
+    "ecl": lambda x: x in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"],
+    "pid": lambda x: re.match(r"^[0-9]{9}$", x)  is not None
+  }
+  return(is_valid[fval[0]](fval[1]))
+
 
 def validate_fields(rec):
   
@@ -50,7 +52,14 @@ def validate_fields(rec):
   fvals = list(filter(lambda y: y[0] != 'cid', fvals))
   
   res = sum([ validate(x) for x in fvals ]) == 7
-  
+
   return(res)
-  
+
 sum([ validate_fields(rec) for rec in recs ])
+
+
+
+
+
+
+
