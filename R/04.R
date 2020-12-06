@@ -137,7 +137,6 @@ validate <- function(field, value) {
     )
   )
 
-
 }
 
 split(input, findInterval(1:length(input), which(input == ""))) %>%
