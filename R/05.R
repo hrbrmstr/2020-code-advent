@@ -81,7 +81,7 @@ strsplit(input, "") %>%
 
     rng <- c(0, 7)
 
-    for (part in .x[8:10]) {
+    for (part in .x[7:10]) {
       amt <- floor((rng[2] - rng[1])/2) + 1
       if (part == "L") {
         rng[2] <- rng[2] - amt
