@@ -6,7 +6,7 @@ public class advent04 {
     
     let reqKeys: Set = [ "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" ]
     
-    guard var input = try? String(contentsOfFile: "/tmp/test.txt", encoding: .utf8)
+    guard var input = try? String(contentsOfFile: "/Users/hrbrmstr/Development/2020-code-advent/input/04-01.txt", encoding: .utf8)
             .components(separatedBy: "\n")  else {
       return(-1)
     }
