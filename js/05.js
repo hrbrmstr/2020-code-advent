@@ -48,12 +48,6 @@ console.log(Math.max(...res))
 
 // 05-02
 
-diff = res.map((n, i, a) => i ? n - a[i-1] : 0 - n)
+diff = res.map((val, idx, arr) => idx ? val - arr[idx-1] : 0 - val)
 
 console.log(res[diff.findIndex((x) => x > 1)] - 1)
-
-
-
-
-
-
