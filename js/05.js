@@ -1,9 +1,6 @@
 var fs = require("fs")
 
-//input = fs.readFileSync("/tmp/test.txt", "utf-8")
 input = fs.readFileSync("../input/05-01.txt", "utf-8")
-
-console.log(input)
 
 res = input
   .split("\n")
