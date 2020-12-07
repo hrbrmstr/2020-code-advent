@@ -26,7 +26,6 @@ object Main extends App {
   
   val records = input.map( (line : String) =>
     (partition(line.substring(0, 7), 0, 127, 'F') * 8) + partition(line.substring(7, 10), 0, 7, 'L')
-
   ).sortWith(_ < _)
 
 
