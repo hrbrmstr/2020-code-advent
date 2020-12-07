@@ -5,7 +5,10 @@
 //print(advent02.day_02_01())
 //
 //print(advent02.day_02_02())
+//
+//print(advent03.day_03_01())
+//
+//print(advent03.day_03_02())
 
-print(advent03.day_03_01())
-
-print(advent03.day_03_02())
+advent04.day_04_01()
+advent04.day_04_02()

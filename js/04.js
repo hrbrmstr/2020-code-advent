@@ -17,7 +17,7 @@ Number.prototype.between = function(a, b) {
   return(this >= min && this <= max)
 };
 
-req_keys = new Set([ "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" ])
+  req_keys = new Set([ "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" ])
 
 input = []
 
