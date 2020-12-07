@@ -63,37 +63,24 @@ library(tidyverse)
 
 input <- readLines("../input/05-01.txt")
 
+partition <- function(seq, lb, ub, trigger) {
+
+  for (part in seq) {
+    amt <- floor((ub - lb)/2) + 1
+    if (part == trigger) {
+      ub <- ub - amt
+    } else {
+      lb <- lb + amt
+    }
+  }
+
+  return(if (tail(seq, 1) == trigger) ub else lb)
+
+}
+
 strsplit(input, "") %>%
   map_dbl(~{
-
-    rng <- c(0, 127)
-
-    for (part in .x[1:7]) {
-      amt <- floor((rng[2] - rng[1])/2) + 1
-      if (part == "F") {
-        rng[2] <- rng[2] - amt
-      } else {
-        rng[1] <- rng[1] + amt
-      }
-    }
-
-    row <- if (.x[7] == "F") rng[1] else rng[2]
-
-    rng <- c(0, 7)
-
-    for (part in .x[7:10]) {
-      amt <- floor((rng[2] - rng[1])/2) + 1
-      if (part == "L") {
-        rng[2] <- rng[2] - amt
-      } else {
-        rng[1] <- rng[1] + amt
-      }
-    }
-
-    seat <- if (.x[10] == "R") rng[1] else rng[2]
-
-    (row * 8) + seat
-
+    (partition(.x[1:7], 0, 127, "F") * 8) + partition(.x[8:10], 0, 7, "L")
   }) %>%
   sort() -> seats
 

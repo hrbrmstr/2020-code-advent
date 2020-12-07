@@ -2,40 +2,30 @@ var fs = require("fs")
 
 input = fs.readFileSync("../input/05-01.txt", "utf-8")
 
+partition = function(seq, lb, ub, trigger) {
+
+  for (part of seq) {
+    amt = Math.floor((ub - lb)/2) + 1
+    if (part === trigger) {
+      ub -= amt
+    } else {
+      lb += amt
+    }
+  }
+
+  return((seq.slice(-1) === trigger) ? ub : lb)
+
+}
+
 res = input
   .split("\n")
   .filter((x) => x.length > 1)
   .map((line) => {
 
-    lb = 0
-    ub = 127
-
-    for (part of line.substr(0, 7)) {
-      amt = Math.floor((ub - lb)/2) + 1
-      if (part === "F") {
-        ub -= amt
-      } else {
-        lb += amt
-      }
-    }
-
-    row = (line.charAt(6) === "F") ? lb : ub
-
-    lb = 0
-    ub = 7
-
-    for (part of line.substr(7, 3)) {
-      amt = Math.floor((ub - lb)/2) + 1
-      if (part === "L") {
-        ub -= amt
-      } else {
-        lb += amt
-      }
-    }
-
-    seat = (line.charAt(9) === "R") ? lb : ub
-
-    return((row * 8) + seat)
+    return(
+      (partition(line.substr(0, 7), 0, 127, "F") * 8) +
+      partition(line.substr(7, 3), 0, 7, "L")
+    )
 
   }).sort()
 
