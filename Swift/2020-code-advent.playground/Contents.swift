@@ -15,7 +15,11 @@
 //advent04.day_04_02()
 //
 //advent05.day_05_01()
+//
+// advent05.day_05_02()
+//
+advent06.day_06_01()
 
-advent05.day_05_02()
+advent06.day_06_02()
 
 
