@@ -32,10 +32,7 @@ max(res)
 
 # 05-02
 
-res.insert(0, res[0])
-
 idx = np.where(np.diff(res) > 1)
 
-res.pop(0)
+res[idx[0][0]] + 1
 
-res[idx[0][0]] - 1

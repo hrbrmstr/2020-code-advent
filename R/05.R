@@ -100,4 +100,4 @@ max(seats)
 #
 # What is the ID of your seat?
 
-seats[which(diff(c(seats[1], seats)) > 1)] - 1
+seats[which(diff(c(seats)) > 1)] + 1
