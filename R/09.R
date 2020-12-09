@@ -75,9 +75,9 @@ input <- as.numeric(read_lines("../input/09-01.txt"))
 preamble_length <- 25
 window <- 1:preamble_length
 input_start <- preamble_length + 1
-no_sum_found <- TRUE
+condition <- TRUE
 
-while(no_sum_found && (length(input)>=(preamble_length + 1))) {
+while(condition && (length(input)>=(preamble_length + 1))) {
 
   as.data.frame(t(combn(window, 2))) %>%
     mutate(
@@ -86,9 +86,9 @@ while(no_sum_found && (length(input)>=(preamble_length + 1))) {
       sum = input[V1] + input[V2]
     ) -> pair_sums
 
-  no_sum_found <- any(pair_sums$sum == input[input_start])
+  condition <- any(pair_sums$sum == input[input_start])
 
-  if (no_sum_found) input <- tail(input, -1)
+  if (condition) input <- tail(input, -1)
 
 }
 
@@ -133,7 +133,7 @@ while(no_sum_found && (length(input)>=(preamble_length + 1))) {
 # producing 62.
 #
 # What is the encryption weakness in your XMAS-encrypted list of numbers?
-# s
+#
 # 09-02 -------------------------------------------------------------------
 
 # input <- test_input
