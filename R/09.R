@@ -73,26 +73,21 @@ input <- as.numeric(read_lines("../input/09-01.txt"))
 
 # preamble_length <- 5
 preamble_length <- 25
-window <- 1:preamble_length
-input_start <- preamble_length + 1
 condition <- TRUE
+
+pairs <- combn(1:preamble_length, 2)
 
 while(condition && (length(input)>=(preamble_length + 1))) {
 
-  as.data.frame(t(combn(window, 2))) %>%
-    mutate(
-      val1 = input[V1],
-      val2 = input[V2],
-      sum = input[V1] + input[V2]
-    ) -> pair_sums
+  pair_sums <- input[pairs[1,]] + input[pairs[2,]]
 
-  condition <- any(pair_sums$sum == input[input_start])
+  condition <- any(pair_sums == input[preamble_length + 1])
 
   if (condition) input <- tail(input, -1)
 
 }
 
-(invalid <- input[input_start])
+(invalid <- input[preamble_length + 1])
 
 
 # --- Part Two ---

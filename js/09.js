@@ -16,13 +16,13 @@ input = fs.readFileSync("../input/09-01.txt", "utf-8")
 //input = [ 35, 20, 15, 25, 47, 40, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277, 309, 576 ]
 
 preamble_length = 25
-input_start = preamble_length
 condition = true
+pairs = [...combn.clone.combination([...Array(preamble_length).keys()], 2)]
 
 while(condition && (input.length > (preamble_length))) {
 
-  for (var pair of combn.combination([...Array(preamble_length).keys()], 2)) {
-    condition = (input[pair[0]] + input[pair[1]]) == input[input_start]
+  for (var pair of pairs) {
+    condition = (input[pair[0]] + input[pair[1]]) == input[preamble_length]
     if (condition) break
   }
 
@@ -30,7 +30,7 @@ while(condition && (input.length > (preamble_length))) {
 
 }
 
-invalid = input[input_start]
+invalid = input[preamble_length]
 
 console.log(invalid)
 // 09-02
@@ -54,14 +54,3 @@ for (var idx=0; idx<input.length; idx++) {
 rng = input.slice(idx, idx+csum.indexOf(invalid))
 
 console.log(Math.min(...rng) + Math.max(...rng))
-
-
-
-
-
-
-
-
-
-
-
